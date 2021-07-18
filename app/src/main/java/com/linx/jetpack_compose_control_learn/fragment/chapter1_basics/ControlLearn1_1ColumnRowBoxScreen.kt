@@ -3,11 +3,14 @@ package com.linx.jetpack_compose_control_learn.fragment.chapter1_basics
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.R
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.linx.jetpack_compose_control_learn.components.ControlLearnDescription
 import com.linx.jetpack_compose_control_learn.components.ControlLearnExampleContentText
@@ -56,6 +59,13 @@ fun ControlLearn1_1Content() {
             ControlLearnExampleContentText(text = "在background之前设置padding - 外边距")
             ControlLearnExampleContentText(text = "先写的属性会先执行,后面的属性会在前面的属性的基础上执行")
             ColumnAndRowPaddingExample()
+
+            ControlLearnDescription(text = "4-) 阴影在Column和Row中的使用")
+            ShadowExample()
+
+            ControlLearnHeader(text = "Box")
+            ControlLearnDescription(text = "5-) Box将子元素像栈堆一样堆在一起,最后一个子元素在最上面")
+            BoxExample()
 
         }
     }
@@ -262,6 +272,70 @@ fun ColumnAndRowPaddingExample() {
             Text(text = "Text C2")
             Text(text = "Text C3")
         }
+
+    }
+
+}
+
+/**
+ * 阴影[shadow]的使用
+ */
+@Composable
+fun ShadowExample() {
+
+    Row(
+        modifier = Modifier
+            .padding(8.dp)
+            .shadow(elevation = 5.dp, shape = RoundedCornerShape(8.dp))
+    ) {
+        RowTexts()
+    }
+
+    Column(
+        modifier = Modifier
+            .padding(8.dp)
+            .shadow(elevation = 5.dp, shape = RoundedCornerShape(8.dp))
+    ) {
+        ColumnTexts()
+    }
+
+}
+
+/**
+ * [Box]的例子
+ */
+@Composable
+fun BoxExample() {
+
+    Box {
+
+        //最底下
+        Text(
+            text = "第一个", modifier = Modifier
+                .background(Color(0xFF1976D2))
+                .fillMaxWidth()
+                .height(200.dp),
+            //右对齐
+            textAlign = TextAlign.End
+        )
+
+        //中间
+        Text(
+            text = "第二个", modifier = Modifier
+                .background(Color(0xFF2196F3))
+                .height(150.dp)
+                .width(300.dp),
+            textAlign = TextAlign.End
+        )
+
+        //最上面
+        Text(
+            text = "第三个", modifier = Modifier
+                .background(Color(0xFF64B5F6))
+                .height(100.dp)
+                .width(200.dp),
+            textAlign = TextAlign.End
+        )
 
     }
 
