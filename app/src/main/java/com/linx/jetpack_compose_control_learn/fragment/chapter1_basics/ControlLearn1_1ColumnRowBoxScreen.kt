@@ -6,12 +6,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.R
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.linx.jetpack_compose_control_learn.components.ControlLearnDescription
 import com.linx.jetpack_compose_control_learn.components.ControlLearnExampleContentText
 import com.linx.jetpack_compose_control_learn.components.ControlLearnHeader
@@ -60,12 +62,22 @@ fun ControlLearn1_1Content() {
             ControlLearnExampleContentText(text = "先写的属性会先执行,后面的属性会在前面的属性的基础上执行")
             ColumnAndRowPaddingExample()
 
+            //shadow
             ControlLearnDescription(text = "4-) 阴影在Column和Row中的使用")
             ShadowExample()
 
+            //Box
             ControlLearnHeader(text = "Box")
             ControlLearnDescription(text = "5-) Box将子元素像栈堆一样堆在一起,最后一个子元素在最上面")
             BoxExample()
+
+            //Box 对齐 Alignment
+            ControlLearnDescription(text = "6-) Box内的元素可以以不同方式对齐 使用Alignment")
+            BoxShadowAndAlignmentExample()
+
+            ControlLearnHeader(text = "Weight和Spacer (权重和间隔)")
+            ControlLearnDescription(text = "父控件的宽/高按权重比例分给各个子控件; Spacer用于创建水平或垂直组件间的空间")
+            WeightAndSpacerExample()
 
         }
     }
@@ -316,7 +328,9 @@ fun BoxExample() {
                 .fillMaxWidth()
                 .height(200.dp),
             //右对齐
-            textAlign = TextAlign.End
+            textAlign = TextAlign.End,
+            //文字颜色
+            color = Color.White
         )
 
         //中间
@@ -325,7 +339,8 @@ fun BoxExample() {
                 .background(Color(0xFF2196F3))
                 .height(150.dp)
                 .width(300.dp),
-            textAlign = TextAlign.End
+            textAlign = TextAlign.End,
+            color = Color.White
         )
 
         //最上面
@@ -334,10 +349,115 @@ fun BoxExample() {
                 .background(Color(0xFF64B5F6))
                 .height(100.dp)
                 .width(200.dp),
-            textAlign = TextAlign.End
+            textAlign = TextAlign.End,
+            color = Color.White
         )
 
     }
+
+}
+
+/**
+ * [Box]对齐方式例子
+ */
+@Composable
+fun BoxShadowAndAlignmentExample() {
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(250.dp)
+            //外边框
+            .padding(4.dp)
+            .background(Color.LightGray)
+            //内边框
+            .padding(8.dp)
+    ) {
+
+        Box(modifier = Modifier.shadow(elevation = 4.dp, shape = RoundedCornerShape(8.dp))) {
+            Text(
+                text = "第一个",
+                modifier = Modifier
+                    .background(Color(0xFFFFA000))
+                    .size(200.dp),
+                color = Color.White
+            )
+        }
+
+        Box(
+            Modifier
+                .shadow(4.dp, RoundedCornerShape(8.dp))
+                //顶部右边
+                .align(Alignment.TopEnd)
+        ) {
+            Text(
+                text = "第二个",
+                Modifier
+                    .background(Color(0xFFFFC107))
+                    .size(150.dp),
+                color = Color.White
+            )
+        }
+
+        Box(
+            Modifier
+                .shadow(4.dp, RoundedCornerShape(8.dp))
+                .align(Alignment.BottomStart)
+        ) {
+            Text(
+                text = "第三个",
+                Modifier
+                    .background(Color(0xFFFFD54F))
+                    .size(100.dp),
+                color = Color.White
+            )
+        }
+
+    }
+
+}
+
+/**
+ * [Weight]权重
+ * [Spacer]间隔
+ */
+@Composable
+fun WeightAndSpacerExample() {
+
+    val modifier = Modifier
+        .fillMaxWidth()
+        .height(100.dp)
+        .background(Color.LightGray)
+
+    val textModifier = Modifier
+        .fillMaxHeight()
+
+    Row(modifier) {
+
+        Text(text = "Weight 2", fontSize = 12.sp, modifier = textModifier
+            .weight(2f)
+            .background(c_FF9800)
+            .padding(4.dp))
+
+        //根据在Column或Row中指定的宽或高或等比例生成间隔
+        Spacer(modifier = modifier.weight(1f))
+
+        Text(text = "Weight 3", fontSize = 12.sp, modifier = textModifier
+            .weight(3f)
+            .background(c_FFA726)
+            .padding(4.dp))
+
+        Spacer(modifier = modifier.weight(1f))
+
+        Text(text = "Weight 4", fontSize = 12.sp, modifier = textModifier
+            .weight(4f)
+            .background(c_FFB74D)
+            .padding(4.dp))
+
+    }
+
+    //这里的间隔是上下结构的
+    Spacer(modifier = Modifier.height(100.dp))
 
 }
 
