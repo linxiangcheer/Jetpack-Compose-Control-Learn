@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.linx.jetpack_compose_control_learn.components.ControlLearnSectionCard
+import com.linx.jetpack_compose_control_learn.fragment.chapter1_basics.ControlLearn1_1ColumnRowBoxScreen
 import com.linx.jetpack_compose_control_learn.model.*
 import com.linx.jetpack_compose_control_learn.ui.theme.JetpackComposeControlLearnTheme
 
@@ -123,7 +124,9 @@ class MainActivity : ComponentActivity() {
 
         val controlLearn1_1 = ControlLearnSectionModel(
             title = "1-1 Column, Row, Box, Modifier",
-            action = null,
+            action = {
+                ControlLearn1_1ColumnRowBoxScreen()
+            },
             description = "创建Column、Row和Box,如何在Composable中添加Modifier," +
                     "设置padding、margin、alignment和其他可组合的属性到Composable中",
             tags = listOf(
