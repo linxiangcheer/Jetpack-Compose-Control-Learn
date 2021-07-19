@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.linx.jetpack_compose_control_learn.components.ControlLearnSectionCard
 import com.linx.jetpack_compose_control_learn.fragment.chapter1_basics.ControlLearn1_1ColumnRowBoxScreen
+import com.linx.jetpack_compose_control_learn.fragment.chapter1_basics.ControlLearn1_2ClickSurfaceAndClicks
 import com.linx.jetpack_compose_control_learn.model.*
 import com.linx.jetpack_compose_control_learn.ui.theme.JetpackComposeControlLearnTheme
 
@@ -138,7 +139,21 @@ class MainActivity : ComponentActivity() {
             )
         )
 
-        return listOf(controlLearn1_1)
+        val controlLearn1_2 = ControlLearnSectionModel(
+            title = "1-2 Surface, Shape, Clickable",
+            action = {
+                ControlLearn1_2ClickSurfaceAndClicks()
+            },
+            description = "创建和修改Surface(表层)来绘制可组合的背景,给任意组合添加点击事件",
+            tags = listOf(
+                TAG_COMPOSE,
+                TAG_COMPOSE_MODIFIER,
+                TAG_COMPOSE_SURFACE,
+                TAG_COMPOSE_SHAPE
+            )
+        )
+
+        return listOf(controlLearn1_1, controlLearn1_2)
     }
 }
 
