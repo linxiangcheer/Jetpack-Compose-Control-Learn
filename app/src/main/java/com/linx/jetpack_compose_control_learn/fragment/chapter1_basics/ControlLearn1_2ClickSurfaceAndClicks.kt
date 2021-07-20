@@ -14,6 +14,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
@@ -68,7 +69,9 @@ private fun ControlLearnContent() {
             ControlLearnExampleContentText(text = "contentColor (为平面组件指定一个首选颜色,作为文本和图标组件内容的默认颜色)")
             SurfaceContentColorExample()
 
-            ControlLearnDescription(text = "5-) ")
+            ControlLearnDescription(text = "5-) 组件可以在x轴或y轴上进行偏移")
+            ControlLearnExampleContentText(text = "offset (x -> 正: 往右偏移; 负：往左偏移) \n(y -> 正: 往下偏移; 负：往上偏移)")
+            SurfaceClickPropagationExample()
 
         }
     }
@@ -266,13 +269,89 @@ fun SurfaceContentColorExample() {
             buildAnnotatedString {
                 append("Surface内部的文本使用Surface的contentColor颜色作为")
                 //后面拼接不同风格的字
-                withStyle(style = SpanStyle(fontWeight = FontWeight.W900, fontSize = 20.sp, color = Color.White)) {
+                withStyle(
+                    style = SpanStyle(
+                        fontWeight = FontWeight.W900,
+                        fontSize = 20.sp,
+                        color = Color.White
+                    )
+                ) {
                     append("默认颜色")
                 }
             },
             modifier = Modifier.padding(12.dp),
             textAlign = TextAlign.Center
         )
+    }
+
+}
+
+@Composable
+fun SurfaceClickPropagationExample() {
+
+    //返回可使用的上下文; 返回最近的compontionlocalprovider组件提供的值
+    val context = LocalContext.current
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .clickable {
+                Toast
+                    .makeText(context, "点击整个大的Box", Toast.LENGTH_SHORT)
+                    .show()
+            }
+    ) {
+
+        Surface(
+            elevation = 10.dp,
+            shape = RoundedCornerShape(1.dp),
+            color = Color(0xFFFDD835),
+            //Modifier中的clip也可以进行裁剪
+            modifier = Modifier
+                .size(150.dp)
+                .padding(12.dp)
+                .clip(RoundedCornerShape(20.dp))
+                .clickable {
+                    Toast
+                        .makeText(context, "点击黄色色块", Toast.LENGTH_SHORT)
+                        .show()
+                }
+        ) {
+
+            Surface(
+                elevation = 12.dp,
+                color = Color(0xFF26C6DA),
+                modifier = Modifier
+                    .size(80.dp)
+                    //x 正: 往右偏移  负：往左偏移
+                    //y 正: 往下偏移  负：往上偏移
+                    .offset(x = 50.dp, y = (-20).dp)
+                    .clip(CircleShape)
+                    .clickable {
+                        Toast
+                            .makeText(context, "点击蓝色色块", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+            ) {}
+
+        }
+
+        Surface(
+            elevation = 8.dp,
+            color = Color(0xFFF4511E),
+            modifier = Modifier
+                .size(110.dp)
+                .padding(12.dp)
+                .offset(x = 110.dp, y = 20.dp)
+                .clip(CutCornerShape(20.dp))
+                .clickable {
+                    Toast
+                        .makeText(context, "点击红色色块", Toast.LENGTH_SHORT)
+                        .show()
+                }
+        ) {}
+
     }
 
 }
