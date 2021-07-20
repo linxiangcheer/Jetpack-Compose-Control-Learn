@@ -11,7 +11,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -20,6 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.linx.jetpack_compose_control_learn.components.ControlLearnSectionCard
 import com.linx.jetpack_compose_control_learn.fragment.chapter1_basics.ControlLearn1_1ColumnRowBoxScreen
 import com.linx.jetpack_compose_control_learn.fragment.chapter1_basics.ControlLearn1_2ClickSurfaceAndClicks
+import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_1Screen
 import com.linx.jetpack_compose_control_learn.model.*
 import com.linx.jetpack_compose_control_learn.ui.theme.JetpackComposeControlLearnTheme
 
@@ -153,7 +153,23 @@ class MainActivity : ComponentActivity() {
             )
         )
 
-        return listOf(controlLearn1_1, controlLearn1_2)
+        val controlLearn2_1 = ControlLearnSectionModel(
+            title = "2-1 Text",
+            action = {
+                ControlLearn2_1Screen()
+            },
+            description = "创建具有不同属性的文本组件," +
+                    "如color、background、font weight、family、style、spacing和其他",
+            tags = listOf(
+                TAG_COMPOSE,
+                TAG_TEXT,
+                TAG_FONT_STYLE,
+                TAG_ANNOTATED_STRING,
+                TAG_HYPERLINK
+            )
+        )
+
+        return listOf(controlLearn1_1, controlLearn1_2, controlLearn2_1)
     }
 }
 
