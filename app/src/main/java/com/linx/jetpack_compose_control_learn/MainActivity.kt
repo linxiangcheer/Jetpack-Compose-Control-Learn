@@ -20,6 +20,7 @@ import com.linx.jetpack_compose_control_learn.components.ControlLearnSectionCard
 import com.linx.jetpack_compose_control_learn.fragment.chapter1_basics.ControlLearn1_1ColumnRowBoxScreen
 import com.linx.jetpack_compose_control_learn.fragment.chapter1_basics.ControlLearn1_2ClickSurfaceAndClicks
 import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_1Screen
+import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_2Screen
 import com.linx.jetpack_compose_control_learn.model.*
 import com.linx.jetpack_compose_control_learn.ui.theme.JetpackComposeControlLearnTheme
 
@@ -169,7 +170,22 @@ class MainActivity : ComponentActivity() {
             )
         )
 
-        return listOf(controlLearn1_1, controlLearn1_2, controlLearn2_1)
+        val controlLearn2_2 = ControlLearnSectionModel(
+            title = "2-2 Button",
+            action = {
+                ControlLearn2_2Screen()
+            },
+            description = "用文本或图像创建按钮、浮动按钮和Chips, 修改按钮的属性:颜色、文本、状态等",
+            tags = listOf(
+                TAG_COMPOSE,
+                TAG_BUTTON,
+                TAG_ICON_BUTTON,
+                TAG_FAB_BUTTON,
+                TAG_CHIP
+            )
+        )
+
+        return listOf(controlLearn1_1, controlLearn1_2, controlLearn2_1, controlLearn2_2)
     }
 }
 

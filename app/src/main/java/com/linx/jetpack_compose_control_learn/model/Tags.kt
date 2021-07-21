@@ -19,3 +19,9 @@ const val TAG_TEXT = "Text"
 const val TAG_FONT_STYLE = "Font Style" //字体类型
 const val TAG_ANNOTATED_STRING = "Annotated String" //注释线
 const val TAG_HYPERLINK = "Hyperlink" //超链接
+
+//Button
+const val TAG_BUTTON = "Button"
+const val TAG_ICON_BUTTON = "IconButton"
+const val TAG_FAB_BUTTON = "FabButton"
+const val TAG_CHIP = "Chip"
