@@ -1,6 +1,8 @@
 package com.linx.jetpack_compose_control_learn.components
 
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -37,13 +39,20 @@ fun ControlLearnHeader(text: String, modifier: Modifier = Modifier) {
  * [AnnotatedString] 带有不同属性的字符串，例如可以在一串字符中设置某些字符的颜色、字体、大小等属性
  */
 @Composable
-fun ControlLearnDescription(text: String, modifier: Modifier = Modifier) {
+fun ControlLearnDescription(text: String, showTopSpacer: Boolean = false, modifier: Modifier = Modifier) {
 
     //有注释的,可以添加风格
     val annotatedString = buildAnnotatedString {
         append(text)
         addStyle(style = SpanStyle(fontWeight = FontWeight.Bold), start = 0, end = 3)
     }
+
+    if (showTopSpacer)
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(20.dp)
+        )
 
     Text(
         text = annotatedString,

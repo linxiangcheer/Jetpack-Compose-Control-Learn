@@ -1,19 +1,29 @@
 package com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Divider
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.UriHandler
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -133,13 +143,7 @@ fun ControlLearnContent() {
             )
             Divider(modifier = Modifier.padding(4.dp))
 
-            Spacer(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(20.dp)
-            )
-
-            ControlLearnDescription(text = "9-) Overflow (行数长度溢出)")
+            ControlLearnDescription(text = "9-) Overflow (行数长度溢出)", showTopSpacer = true)
             //直接删除溢出部分文字
             Text(
                 text = "TextOverflow.Clip: 这段文字主要测试行数长度超过限制的时候会如何处理",
@@ -154,14 +158,20 @@ fun ControlLearnContent() {
                 maxLines = 1
             )
 
-            Spacer(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(20.dp)
-            )
+            ControlLearnDescription(text = "10) Background (背景)", showTopSpacer = true)
+            TextBackgroundExample()
 
-            ControlLearnDescription(text = "10) Background (背景)")
-            TextBackgroundAndBorderExample()
+            ControlLearnDescription(text = "11) Border (边缘)", showTopSpacer = true)
+            TextBorderExample()
+
+            ControlLearnDescription(text = "12) Shadow (阴影)", showTopSpacer = true)
+            TextShadowExample()
+
+            ControlLearnDescription(
+                text = "13) AnnotatedString (特定文字处理, 显示/超链接)",
+                showTopSpacer = true
+            )
+            TextSpannableExample()
 
         }
 
@@ -246,54 +256,61 @@ fun TextSampleRow(showBottomSpacer: Boolean = true, content: @Composable () -> U
  * 用纯色或渐变颜色绘制带有背景或边框的[Text]
  */
 @Composable
-fun TextBackgroundAndBorderExample() {
+fun TextBackgroundExample() {
+
+    //横向渐变
+    val horizontalGradientBrush = Brush.horizontalGradient(
+        colors = listOf(
+            Color(0xffF57F17),
+            Color(0xffFFEE58),
+            Color(0xffFFF9C4)
+        )
+    )
 
     Row(
-        modifier = Modifier.fillMaxWidth().height(100.dp),
-//        horizontalArrangement = Arrangement.SpaceEvenly
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        verticalAlignment = Alignment.CenterVertically
     ) {
 
-        //横向渐变
-        val horizontalGradientBrush = Brush.horizontalGradient(
-            colors = listOf(
-                Color(0xffF57F17),
-                Color(0xffFFEE58),
-                Color(0xffFFF9C4)
-            )
-        )
-
-        Text(
-            text = "渐变",
-            fontSize = 15.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            textAlign = TextAlign.Center,
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .padding(10.dp)
                 .background(brush = horizontalGradientBrush)
                 .fillMaxHeight()
                 .weight(1f)
-        )
+        ) {
+            Text(
+                text = "横向渐变",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
 
-        Text(
-            text = "纯色圆角",
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            fontSize = 15.sp,
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .padding(10.dp)
                 .background(Color(0xffFF9800), shape = RoundedCornerShape(10.dp))
                 .fillMaxHeight()
-                .weight(1f),
-            textAlign = TextAlign.Center
-        )
+                .weight(1f)
+        ) {
+            Text(
+                text = "纯色圆角",
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                fontSize = 15.sp,
+            )
+        }
 
-        Text(
-            text = "纯色裁剪",
-            fontSize = 15.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            textAlign = TextAlign.Center,
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .padding(10.dp)
                 .background(
@@ -302,9 +319,251 @@ fun TextBackgroundAndBorderExample() {
                 )
                 .fillMaxHeight()
                 .weight(1f)
+        ) {
+            Text(
+                text = "纯色裁剪",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                textAlign = TextAlign.Center,
+            )
+        }
+
+    }
+
+}
+
+/**
+ * 用纯色或渐变颜色绘制带有边框的[Text]
+ */
+@Composable
+fun TextBorderExample() {
+
+    //纵向渐变
+    val verticalGradientBrush = Brush.verticalGradient(
+        colors = listOf(
+            Color(0xff4E342E),
+            Color(0xff8D6E63),
+            Color(0xffD7CCC8)
+        )
+    )
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+
+        Row(
+            modifier = Modifier
+                .padding(10.dp)
+                .border(
+                    width = 4.dp,
+                    brush = verticalGradientBrush,
+                    shape = RectangleShape
+                )
+                //内边距
+//                .padding(20.dp)
+                .fillMaxHeight()
+                .weight(1f),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "纵向渐变",
+                fontWeight = FontWeight.Bold,
+                fontSize = 15.sp,
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .padding(10.dp)
+                .border(
+                    width = 4.dp,
+                    Color(0xffFF9800),
+                    shape = RoundedCornerShape(20.dp)
+                )
+                .fillMaxHeight()
+                .weight(1f),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "纯色圆角",
+                fontWeight = FontWeight.Bold,
+                fontSize = 15.sp
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .padding(10.dp)
+                .border(
+                    width = 4.dp,
+                    color = Color(0xff00BCD4),
+                    //[topStartPercent] 百分比
+                    shape = CutCornerShape(topStartPercent = 25)
+                )
+                .fillMaxHeight()
+                .weight(1f),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "纯色裁剪",
+                fontWeight = FontWeight.Bold,
+                fontSize = 15.sp
+            )
+        }
+
+    }
+
+}
+
+/**
+ * 绘制文本阴影 [shadow]
+ */
+@Composable
+fun TextShadowExample() {
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+
+        Text(
+            text = "右下阴影",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            style = TextStyle(
+                shadow = Shadow(
+                    color = Color.Red,
+                    //模糊半径
+                    blurRadius = 10f,
+                    offset = Offset(10f, 10f)
+                )
+            )
+        )
+
+        Text(
+            text = "左上阴影",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            style = TextStyle(
+                shadow = Shadow(
+                    color = Color.Blue,
+                    blurRadius = 10f,
+                    offset = Offset(-10f, -10f)
+                )
+            )
+        )
+
+        Text(
+            text = "阴影半径",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            style = TextStyle(
+                shadow = Shadow(
+                    color = Color.Yellow,
+                    blurRadius = 30f,
+                    offset = Offset(5f, 5f)
+                )
+            )
         )
 
     }
+
+}
+
+/**
+ * 特定文字显示 [AnnotatedString]
+ */
+@Composable
+fun TextSpannableExample() {
+
+    val annotatedColorString = buildAnnotatedString {
+        append("红色绿色蓝色")
+        addStyle(
+            style = SpanStyle(
+                color = Color.Red,
+                fontSize = 24.sp
+            ),
+            //包含
+            start = 0,
+            //不包含
+            end = 2
+        )
+        addStyle(
+            style = SpanStyle(
+                color = Color.Green,
+                fontSize = 19.sp
+            ),
+            start = 2,
+            end = 4
+        )
+        addStyle(
+            style = SpanStyle(
+                color = Color.Blue,
+                fontSize = 11.sp
+            ),
+            start = 4,
+            end = 6
+        )
+    }
+
+    Text(
+        text = annotatedColorString, modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+    )
+
+    val annotatedLinkString: AnnotatedString = buildAnnotatedString {
+
+        val str = "点击超链接文字跳转到网页"
+        //从指定的startIndex开始，返回指定字符串第一次出现的字符序列中的索引
+        val startIndex = str.indexOf("超链接")
+        val endIndex = startIndex + 3
+        append(str)
+
+        addStyle(
+            style = SpanStyle(
+                color = Color(0xff64B5F6),
+                fontSize = 18.sp,
+                textDecoration = TextDecoration.Underline
+            ),
+            start = startIndex,
+            end = endIndex
+        )
+
+        //附加一个字符串注释，存储一个URL到文本
+        addStringAnnotation(
+            tag = "URL",
+            annotation = "https://baidu.com",
+            start = startIndex,
+            end = endIndex
+        )
+
+    }
+
+    //使用UriHandler解析AnnotatedString内的[addStringAnnotation]
+    val uriHandler: UriHandler = LocalUriHandler.current
+
+    //可单击文本,需点击设置好的start - end范围内的文字
+    ClickableText(
+        modifier = Modifier
+            .padding(start = 16.dp, bottom = 16.dp)
+            .fillMaxWidth(),
+        text = annotatedLinkString,
+        onClick = {
+            annotatedLinkString.getStringAnnotations(it, it)
+                .firstOrNull()?.let { range ->
+                    println("点击 $it, item:$range")
+                    uriHandler.openUri(range.item)
+                }
+        }
+    )
 
 }
 
