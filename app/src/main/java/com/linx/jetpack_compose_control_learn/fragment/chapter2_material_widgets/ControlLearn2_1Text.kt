@@ -1,7 +1,10 @@
 package com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CutCornerShape
@@ -18,6 +21,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.text.AnnotatedString
@@ -172,6 +176,9 @@ fun ControlLearnContent() {
                 showTopSpacer = true
             )
             TextSpannableExample()
+
+            ControlLearnDescription(text = "14) click (可点击)", showTopSpacer = true)
+            TextClickExample()
 
         }
 
@@ -563,6 +570,47 @@ fun TextSpannableExample() {
                     uriHandler.openUri(range.item)
                 }
         }
+    )
+
+}
+
+/**
+ * 可点击的Text
+ */
+@Composable
+fun TextClickExample() {
+
+    val context = LocalContext.current
+
+    Text(text = "这个Text是可点击的", modifier = Modifier
+        //外边框
+        .padding(10.dp)
+        .background(Color.Red)
+        .clickable {
+            Toast
+                .makeText(context, "点击Text", Toast.LENGTH_SHORT)
+                .show()
+        }
+        //内边框
+        .padding(10.dp),
+        color = Color.White
+    )
+
+    Text(
+        text = "可点击但是没有波纹的Text", modifier = Modifier
+            .padding(10.dp)
+            .background(Color.LightGray)
+            .clickable(
+                onClick = {
+                    Toast
+                        .makeText(context, "没有波纹的Text", Toast.LENGTH_SHORT)
+                        .show()
+                },
+                indication = null,
+                interactionSource = MutableInteractionSource()
+            )
+            .padding(10.dp),
+        color = Color.White
     )
 
 }
