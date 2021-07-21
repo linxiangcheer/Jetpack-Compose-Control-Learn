@@ -175,7 +175,7 @@ class MainActivity : ComponentActivity() {
             action = {
                 ControlLearn2_2Screen()
             },
-            description = "用文本或图像创建按钮、浮动按钮和Chips, 修改按钮的属性:颜色、文本、状态等",
+            description = "创建带有文本或图像的按钮、浮动按钮和Chips, 修改按钮的属性:颜色、文本、状态等",
             tags = listOf(
                 TAG_COMPOSE,
                 TAG_BUTTON,
