@@ -25,3 +25,10 @@ const val TAG_BUTTON = "Button"
 const val TAG_ICON_BUTTON = "IconButton"
 const val TAG_FAB_BUTTON = "FabButton"
 const val TAG_CHIP = "Chip"
+
+//Text Field
+const val TAG_TEXT_FIELD = "TextField"
+const val TAG_OUTLINED_TEXT_FIELD = "Outlined TextField"
+const val TAG_IME = "Ime"
+const val TAG_REGEX = "Regex"
+const val TAG_VISUAL_TRANSFORMATION = "Visual Transformation"

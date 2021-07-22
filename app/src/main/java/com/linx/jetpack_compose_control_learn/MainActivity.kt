@@ -21,6 +21,7 @@ import com.linx.jetpack_compose_control_learn.fragment.chapter1_basics.ControlLe
 import com.linx.jetpack_compose_control_learn.fragment.chapter1_basics.ControlLearn1_2ClickSurfaceAndClicks
 import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_1Screen
 import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_2Screen
+import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_3TextFieldScreen
 import com.linx.jetpack_compose_control_learn.model.*
 import com.linx.jetpack_compose_control_learn.ui.theme.JetpackComposeControlLearnTheme
 
@@ -185,7 +186,29 @@ class MainActivity : ComponentActivity() {
             )
         )
 
-        return listOf(controlLearn1_1, controlLearn1_2, controlLearn2_1, controlLearn2_2)
+        val controlLearn2_3 = ControlLearnSectionModel(
+            title = "2-3 TextField",
+            action = {
+                ControlLearn2_3TextFieldScreen()
+            },
+            description = "创建具有常规样式的TextField组件,设置error、colors、state、icons和IME属性",
+            tags = listOf(
+                TAG_COMPOSE,
+                TAG_TEXT_FIELD,
+                TAG_OUTLINED_TEXT_FIELD,
+                TAG_IME,
+                TAG_REGEX,
+                TAG_VISUAL_TRANSFORMATION
+            )
+        )
+
+        return listOf(
+            controlLearn1_1,
+            controlLearn1_2,
+            controlLearn2_1,
+            controlLearn2_2,
+            controlLearn2_3
+        )
     }
 }
 

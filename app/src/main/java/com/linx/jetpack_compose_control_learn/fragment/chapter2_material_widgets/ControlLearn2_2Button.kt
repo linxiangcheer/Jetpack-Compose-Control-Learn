@@ -61,7 +61,7 @@ fun ControlLearnButtonContent() {
             DisabledButtonExample(paddingModifier)
 
             IconButtonExample(paddingModifier)
-            ControlLearnExampleContentText(text = "带按钮大小改变动画的按钮")
+            ControlLearnExampleContentText(text = "带动画的按钮(缩放)")
             AnimatedIconButtonExample(paddingModifier)
 
             ControlLearnHeader(text = "Floating Action Button (浮动按钮)")
