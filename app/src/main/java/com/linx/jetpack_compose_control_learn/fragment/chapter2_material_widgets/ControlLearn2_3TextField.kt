@@ -48,8 +48,10 @@ fun TextFieldScreenContent() {
             ControlLearnExampleContentText(text = "设置基本颜色属性")
             ControlLearnExampleContentText(
                 text = "textColor (文本颜色)\nbackgroundColor (背景颜色)\ncursorColor (光标颜色)\n" +
-                        "placeholderColor (提示文字颜色)\nfocusedLabelColor (输入框有焦点时标签文字颜色)\n" +
-                        "unfocusedLabelColor (输入框没有焦点时标签文字颜色)"
+                        "placeholderColor (提示文字颜色)\nfocusedLabelColor (输入框有焦点时,标签文字颜色)\n" +
+                        "unfocusedLabelColor (输入框不处于焦点时,标签文字颜色)\n" +
+                        "focusedIndicatorColor (输入框处于焦点时,底部指示器的颜色)\n" +
+                        "unfocusedIndicatorColor (输入框不处于焦点时,底部指示器的颜色)"
             )
             ColorsTextFieldExampleA(fullWidthModifier)
 
