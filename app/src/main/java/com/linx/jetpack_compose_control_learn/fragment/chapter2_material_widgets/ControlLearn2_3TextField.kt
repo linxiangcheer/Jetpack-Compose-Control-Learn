@@ -1,5 +1,6 @@
 package com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets
 
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,21 +8,22 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.*
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.linx.jetpack_compose_control_learn.components.ControlLearnDescription
 import com.linx.jetpack_compose_control_learn.components.ControlLearnExampleContentText
@@ -71,6 +73,15 @@ fun TextFieldScreenContent() {
 
             ControlLearnDescription(text = "6-) keyboardOptions (改变TextField输入类型)")
             TypeTextField(fullWidthModifier)
+
+            ControlLearnDescription(text = "7-) 设置leading icons (输入框头部图标)和trailing icons (尾部图标)")
+            IconsTextDescription(fullWidthModifier)
+
+            ControlLearnDescription(text = "8-) IME icon And Action (改变软键盘右下角按键的图标和行为)")
+            IMEIconAndAction(fullWidthModifier)
+            
+            ControlLearnDescription(text = "9-) visualTransformation （输入的字符串转为掩码字符串,输入密码中会用到）")
+            VisualTransformationTextField(fullWidthModifier)
 
         }
     }
@@ -171,9 +182,9 @@ private fun AllColorsTextFieldExample(modifier: Modifier) {
             backgroundColor = Color.Green,
             //光标颜色
             cursorColor = Color.Green,
-            //输入框前头的颜色
+            //输入框前头图标的颜色
             leadingIconColor = Color.Green,
-            //输入框尾部的颜色
+            //输入框尾部图标的颜色
             trailingIconColor = Color.Green,
             //提示文字颜色
             placeholderColor = Color.Green,
@@ -513,11 +524,17 @@ fun TypeTextField(modifier: Modifier) {
 
     ControlLearnExampleContentText(
         text = "KeyboardType.Password (输入框的类型是密码)\n" +
-                "visualTransformation = PasswordVisualTransformation() (转化为不可见的密码)"
+                "visualTransformation = PasswordVisualTransformation() (转为掩码字符串)" +
+                "VisualTransformation.None (转化为可见的密码)"
     )
 
     val textFieldValue = remember {
         mutableStateOf(TextFieldValue(""))
+    }
+
+    //是否可见
+    val passWordHidden = remember {
+        mutableStateOf(false)
     }
 
     OutlinedTextField(
@@ -532,10 +549,17 @@ fun TypeTextField(modifier: Modifier) {
         label = {
             Text(text = "请输入密码")
         },
+        trailingIcon = {
+            IconButton(onClick = {
+                passWordHidden.value = !passWordHidden.value
+            }) {
+                Icon(imageVector = Icons.Outlined.Notifications, contentDescription = null)
+            }
+        },
         //输入设置  密码
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         //转化为不可见的密码
-        visualTransformation = PasswordVisualTransformation()
+        visualTransformation = if (!passWordHidden.value) PasswordVisualTransformation() else VisualTransformation.None
     )
 
     OutlinedTextField(
@@ -552,6 +576,143 @@ fun TypeTextField(modifier: Modifier) {
         },
         //输入设置  手机号
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+    )
+
+}
+
+/**
+ * 设置leading icons (输入框头部图标)和trailing icons (尾部图标)
+ */
+@Composable
+fun IconsTextDescription(modifier: Modifier) {
+
+    ControlLearnExampleContentText(text = "leadingIcon (输入框头部图标)\ntrailingIcon (输入框尾部图标)")
+
+    val textFieldValue = remember {
+        mutableStateOf(TextFieldValue(""))
+    }
+
+    OutlinedTextField(
+        value = textFieldValue.value,
+        onValueChange = { newValue ->
+            textFieldValue.value = newValue
+        },
+        modifier = modifier,
+        placeholder = {
+            Text(text = "trailingIcon")
+        },
+        label = {
+            Text(text = "leadingIcon")
+        },
+        leadingIcon = {
+            Icon(imageVector = Icons.Default.FavoriteBorder, contentDescription = null)
+        },
+        trailingIcon = {
+            Icon(imageVector = Icons.Default.Call, contentDescription = null)
+        }
+    )
+
+    ControlLearnExampleContentText(text = "colors 设置leadingIcon和trailingIcon图标在输入框正常、禁用、错误时的颜色")
+
+    OutlinedTextField(
+        value = textFieldValue.value,
+        onValueChange = { newValue ->
+            textFieldValue.value = newValue
+        },
+        modifier = modifier,
+        placeholder = {
+            Text(text = "trailingIcon")
+        },
+        label = {
+            Text(text = "leadingIcon")
+        },
+        leadingIcon = {
+            Icon(imageVector = Icons.Default.Favorite, contentDescription = null)
+        },
+        trailingIcon = {
+            Icon(imageVector = Icons.Default.FavoriteBorder, contentDescription = null)
+        },
+        colors = TextFieldDefaults.textFieldColors(
+            leadingIconColor = Color.Red,
+            trailingIconColor = Color.Red,
+        )
+    )
+}
+
+/**
+ * 改变软键盘右下角按键的图标和行为
+ */
+@Composable
+fun IMEIconAndAction(modifier: Modifier) {
+
+    ControlLearnExampleContentText(text = "keyborardOptions (imeAction设置软键盘右下角按钮的图标)\n" +
+            "keyboardActions内设置点击事件,类型要和图标类型一致")
+
+    //todo
+    ControlLearnExampleContentText(text = "隐藏软键盘(暂时不知道如何实现)", textDecoration = TextDecoration.LineThrough)
+
+    val context = LocalContext.current
+
+    val searchText = remember {
+        mutableStateOf(TextFieldValue(""))
+    }
+
+    OutlinedTextField(
+        value = searchText.value,
+        onValueChange = { newValue ->
+            searchText.value = newValue
+        },
+        modifier = modifier,
+        placeholder = {
+            Text(text = "placeholder")
+        },
+        label = {
+            Text(text = "label")
+        },
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(
+            //搜索
+            imeAction = ImeAction.Search,
+            //第一个字母大写
+            capitalization = KeyboardCapitalization.Words,
+            //自动检查，如果键盘是小写键盘就替换成大写键盘
+            autoCorrect = true
+        ),
+        //软键盘的点击事件
+        keyboardActions = KeyboardActions(
+            onSearch = {
+                Toast.makeText(context, "点击了搜索软键盘", Toast.LENGTH_SHORT).show()
+            }
+        )
+    )
+
+}
+
+/**
+ * 可以将文字转为
+ */
+@Composable
+fun VisualTransformationTextField(modifier: Modifier) {
+
+    val maskText = remember {
+        mutableStateOf(TextFieldValue(""))
+    }
+
+    OutlinedTextField(
+        value = maskText.value,
+        onValueChange = { newValue ->
+            maskText.value = newValue
+        },
+        modifier = modifier,
+        placeholder = {
+            Text(text = "随意输入字符串")
+        },
+        label = {
+            Text(text = "掩码字符串")
+        },
+        singleLine = true,
+        //转为掩码字符串
+        visualTransformation = PasswordVisualTransformation()
     )
 
 }

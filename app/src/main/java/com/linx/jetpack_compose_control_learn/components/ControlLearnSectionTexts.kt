@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -68,7 +69,7 @@ fun ControlLearnDescription(text: String, showTopSpacer: Boolean = false, modifi
  * 例子的内容的text
  */
 @Composable
-fun ControlLearnExampleContentText(text: String, modifier: Modifier = Modifier) {
+fun ControlLearnExampleContentText(text: String, modifier: Modifier = Modifier, textDecoration: TextDecoration = TextDecoration.None) {
 
     Text(
         text = text,
@@ -76,7 +77,8 @@ fun ControlLearnExampleContentText(text: String, modifier: Modifier = Modifier) 
             .fillMaxWidth()
             .padding(8.dp),
         color = Color.Gray,
-        style = MaterialTheme.typography.body2
+        style = MaterialTheme.typography.body2,
+        textDecoration = textDecoration
     )
 
 }
