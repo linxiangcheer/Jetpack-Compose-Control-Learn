@@ -32,3 +32,15 @@ const val TAG_OUTLINED_TEXT_FIELD = "Outlined TextField"
 const val TAG_IME = "Ime"
 const val TAG_REGEX = "Regex"
 const val TAG_VISUAL_TRANSFORMATION = "Visual Transformation"
+
+//Image
+const val TAG_IMAGE = "Image"
+const val TAG_DRAWABLE = "Drawable"
+const val TAG_VECTOR_DRAWABLE = "Vector Drawable"
+const val TAG_BITMAP = "Bitmap"
+
+//Canvas
+const val TAG_CANVAS = "Canvas"
+
+//GenericShape
+const val TAG_GENERICSHAPE = "GenericShape"

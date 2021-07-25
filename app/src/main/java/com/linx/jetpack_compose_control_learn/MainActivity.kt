@@ -22,6 +22,7 @@ import com.linx.jetpack_compose_control_learn.fragment.chapter1_basics.ControlLe
 import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_1Screen
 import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_2Screen
 import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_3TextFieldScreen
+import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_4Screen
 import com.linx.jetpack_compose_control_learn.model.*
 import com.linx.jetpack_compose_control_learn.ui.theme.JetpackComposeControlLearnTheme
 
@@ -202,12 +203,51 @@ class MainActivity : ComponentActivity() {
             )
         )
 
+        val controlLearn2_4 = ControlLearnSectionModel(
+            title = "2-4 Image",
+            action = {
+                ControlLearn2_4Screen()
+            },
+            description = "创建并显示图像,设置图像裁剪风格、改变图像形状," +
+                    "应用图像的ColorFilter和PorterDuff模式",
+            tags = listOf(
+                TAG_COMPOSE,
+                TAG_IMAGE,
+                TAG_DRAWABLE,
+                TAG_VECTOR_DRAWABLE,
+                TAG_BITMAP
+            )
+        )
+
+        val controlLearn3_1 = ControlLearnSectionModel(
+            title = "3-1 Canvas (敬请期待)",
+            action = null,
+            description = "使用Canvas对屏幕上指定区域执行绘制",
+            tags = listOf(
+                TAG_COMPOSE,
+                TAG_CANVAS
+            )
+        )
+
+        val controlLearn3_2 = ControlLearnSectionModel(
+            title = "3-2 GenericShape (敬请期待)",
+            action = null,
+            description = "GenericShape通过在Path路径上用提供的构建器来创建形状",
+            tags = listOf(
+                TAG_COMPOSE,
+                TAG_GENERICSHAPE
+            )
+        )
+
         return listOf(
             controlLearn1_1,
             controlLearn1_2,
             controlLearn2_1,
             controlLearn2_2,
-            controlLearn2_3
+            controlLearn2_3,
+            controlLearn2_4,
+            controlLearn3_1,
+            controlLearn3_2
         )
     }
 }
