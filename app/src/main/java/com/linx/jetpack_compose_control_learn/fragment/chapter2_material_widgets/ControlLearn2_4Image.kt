@@ -181,11 +181,6 @@ fun ImageContentScaleExample() {
         .aspectRatio(4 / 3f)
         .background(Color.LightGray)
 
-    val imageModifier2 = Modifier
-        .fillMaxHeight()
-        .aspectRatio(1f)
-        .background(Color.LightGray)
-
     FullWithColumn {
 
         val painter = painterResource(id = R.drawable.scenery1)
