@@ -2,6 +2,7 @@ package com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widget
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -29,18 +30,26 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.ImagePainter
+import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.accompanist.coil.rememberCoilPainter
+import com.google.accompanist.imageloading.ImageLoadState
 import com.linx.jetpack_compose_control_learn.R
 import com.linx.jetpack_compose_control_learn.components.*
 
+@ExperimentalCoilApi
 @Composable
 fun ControlLearn2_4Screen() {
     ControlLearn2_4Content()
 }
 
+@ExperimentalCoilApi
 @Composable
 fun ControlLearn2_4Content() {
 
@@ -62,8 +71,8 @@ fun ControlLearn2_4Content() {
 
             ControlLearnDescription(text = "4-) 使用Glide从网络中获取图像资源并显示在界面上")
             ImageDownloadWithGlideExample()
-            
-            ControlLearnDescription(text = "5-) 使用Coil从网络中获取图像资源并显示在界面上")
+
+            ControlLearnDescription(text = "5-) 使用Coil从网络中获取图像资源并显示在界面上 (推荐使用)")
             ImageDownloadWithCoilExample()
 
         }
@@ -498,7 +507,7 @@ private fun ImageShapeAndFilterExample() {
 fun ImageDownloadWithGlideExample() {
 
     val url =
-        "https://avatars3.githubusercontent.com/u/35650605?s=400&u=058086fd5c263f50f2fbe98ed24b5fbb7d437a4e&v=4"
+        "https://cdn-hz.skypixel.com/uploads/cn_files/photo/image/9e4d34c0-fd29-47d1-af5e-eedd9e673efb.jpg@!1920"
 
     //可以为空的ImageBitmap,资源在被释放的时候为null
     var imageBitmap by remember {
@@ -545,10 +554,53 @@ fun ImageDownloadWithGlideExample() {
 
 /**
  * 使用Coil获取网络图片
+ * 实验性api
  */
+@ExperimentalCoilApi
 @Composable
-fun ImageDownloadWithCoilExample() {
-    
+private fun ImageDownloadWithCoilExample() {
+
+    val url =
+        "https://cdn-hz.skypixel.com/uploads/cn_files/photo/image/9e4d34c0-fd29-47d1-af5e-eedd9e673efb.jpg@!1920"
+
+    val painter = rememberImagePainter(data = url)
+
+    when (painter.state) {
+        //加载中
+        is ImagePainter.State.Loading -> {
+            println("喂喂喂 Loading")
+        }
+        //请求失败
+        is ImagePainter.State.Error -> {
+            println("喂喂喂 Error")
+        }
+        //请求成功
+        is ImagePainter.State.Success -> {
+            println("喂喂喂 Success")
+        }
+        //请求尚未启动
+        is ImagePainter.State.Empty -> {
+            println("喂喂喂 Empty")
+        }
+    }
+
+    Column(
+        modifier = Modifier
+                //外边框
+            .padding(bottom = 20.dp)
+            .fillMaxWidth()
+            .height(150.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Image(
+            painter = painter,
+            contentDescription = null,
+            //保持源图片宽高比,等比缩放
+            contentScale = ContentScale.Fit
+        )
+    }
+
 }
 
 
