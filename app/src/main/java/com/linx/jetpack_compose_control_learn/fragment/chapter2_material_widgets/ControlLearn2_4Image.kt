@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.accompanist.coil.rememberCoilPainter
 import com.linx.jetpack_compose_control_learn.R
 import com.linx.jetpack_compose_control_learn.components.*
 
@@ -61,6 +62,9 @@ fun ControlLearn2_4Content() {
 
             ControlLearnDescription(text = "4-) 使用Glide从网络中获取图像资源并显示在界面上")
             ImageDownloadWithGlideExample()
+            
+            ControlLearnDescription(text = "5-) 使用Coil从网络中获取图像资源并显示在界面上")
+            ImageDownloadWithCoilExample()
 
         }
     }
@@ -537,6 +541,14 @@ fun ImageDownloadWithGlideExample() {
 
     }
 
+}
+
+/**
+ * 使用Coil获取网络图片
+ */
+@Composable
+fun ImageDownloadWithCoilExample() {
+    
 }
 
 

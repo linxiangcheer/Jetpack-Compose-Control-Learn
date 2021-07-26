@@ -213,9 +213,13 @@ class MainActivity : ComponentActivity() {
             tags = listOf(
                 TAG_COMPOSE,
                 TAG_IMAGE,
-                TAG_DRAWABLE,
-                TAG_VECTOR_DRAWABLE,
-                TAG_BITMAP
+                TAG_IMAGEVECTOR,
+                TAG_PAINTER,
+                TAG_CONTENTSCALE,
+                TAG_SHAPE,
+                TAG_FILTER,
+                TAG_GLIDE,
+                TAG_COIL
             )
         )
 

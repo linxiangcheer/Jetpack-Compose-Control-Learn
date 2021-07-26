@@ -35,9 +35,13 @@ const val TAG_VISUAL_TRANSFORMATION = "Visual Transformation"
 
 //Image
 const val TAG_IMAGE = "Image"
-const val TAG_DRAWABLE = "Drawable"
-const val TAG_VECTOR_DRAWABLE = "Vector Drawable"
-const val TAG_BITMAP = "Bitmap"
+const val TAG_IMAGEVECTOR = "ImageVector"
+const val TAG_PAINTER = "Painter"
+const val TAG_CONTENTSCALE = "ContentScale"
+const val TAG_SHAPE = "shape"
+const val TAG_FILTER = "filter"
+const val TAG_GLIDE = "Glide"
+const val TAG_COIL = "Coil"
 
 //Canvas
 const val TAG_CANVAS = "Canvas"

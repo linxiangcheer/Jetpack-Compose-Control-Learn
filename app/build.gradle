@@ -65,9 +65,9 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
 
     //Glide
-    implementation "dev.chrisbanes.accompanist:accompanist-glide:0.5.0"
+    implementation "com.google.accompanist:accompanist-glide:0.14.0"
     //Coil 核心库
-    implementation "dev.chrisbanes.accompanist:accompanist-coil:0.6.2"
+    implementation "com.google.accompanist:accompanist-coil:0.14.0"
     //Coil 选择添加
 //    implementation("io.coil-kt:coil-gif:1.2.2")//支持GIF
 //    implementation("io.coil-kt:coil-svg:1.2.2")//支持SVG
