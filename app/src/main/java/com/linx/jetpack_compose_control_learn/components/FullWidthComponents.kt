@@ -1,6 +1,7 @@
 package com.linx.jetpack_compose_control_learn.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
@@ -26,4 +27,17 @@ fun FullWidthRow(
         content.invoke()
     }
 
+}
+
+/**
+ * 填满宽度的Column
+ */
+@Composable
+fun FullWithColumn(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Column(modifier.fillMaxWidth()) {
+        content.invoke()
+    }
 }
