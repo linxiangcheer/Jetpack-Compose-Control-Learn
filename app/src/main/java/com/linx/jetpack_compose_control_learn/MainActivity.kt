@@ -16,16 +16,15 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import coil.annotation.ExperimentalCoilApi
 import com.linx.jetpack_compose_control_learn.components.ControlLearnSectionCard
 import com.linx.jetpack_compose_control_learn.fragment.chapter1_basics.ControlLearn1_1ColumnRowBoxScreen
 import com.linx.jetpack_compose_control_learn.fragment.chapter1_basics.ControlLearn1_2ClickSurfaceAndClicks
-import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_1Screen
-import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_2Screen
-import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_3TextFieldScreen
-import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.ControlLearn2_4Screen
+import com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widgets.*
 import com.linx.jetpack_compose_control_learn.model.*
 import com.linx.jetpack_compose_control_learn.ui.theme.JetpackComposeControlLearnTheme
 
+@ExperimentalCoilApi
 class MainActivity : ComponentActivity() {
 
     private lateinit var controlLearnList: List<ControlLearnSectionModel>
@@ -223,6 +222,18 @@ class MainActivity : ComponentActivity() {
             )
         )
 
+        val controlLearn2_5 = ControlLearnSectionModel(
+            title = "2-5 Card (未完)",
+            action = {
+                ControlLearn2_5Screen()
+            },
+            description = "",
+            tags = listOf(
+                TAG_COMPOSE,
+                TAG_CARD,
+            )
+        )
+
         val controlLearn3_1 = ControlLearnSectionModel(
             title = "3-1 Canvas (敬请期待)",
             action = null,
@@ -250,6 +261,7 @@ class MainActivity : ComponentActivity() {
             controlLearn2_2,
             controlLearn2_3,
             controlLearn2_4,
+            controlLearn2_5,
             controlLearn3_1,
             controlLearn3_2
         )

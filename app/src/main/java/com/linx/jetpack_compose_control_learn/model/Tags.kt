@@ -43,6 +43,9 @@ const val TAG_FILTER = "filter"
 const val TAG_GLIDE = "Glide"
 const val TAG_COIL = "Coil"
 
+//Card
+const val TAG_CARD = "Card"
+
 //Canvas
 const val TAG_CANVAS = "Canvas"
 
