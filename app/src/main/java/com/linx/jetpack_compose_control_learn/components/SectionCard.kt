@@ -131,10 +131,10 @@ fun CodeCard(list: List<String>, codeTitle: String = "", modifier: Modifier = Mo
                 //是否以//开头，如果是的话就是注释
                 when (items.startsWith("//")) {
                     true -> {
-                        Text(text = "    $items", fontSize = 15.sp, color = c_bfbbbb)
+                        Text(text = "    $items", fontSize = 14.sp, color = c_bfbbbb)
                     }
                     false -> {
-                        Text(text = items, fontSize = 16.sp)
+                        Text(text = items, fontSize = 14.sp)
                     }
                 }
             }

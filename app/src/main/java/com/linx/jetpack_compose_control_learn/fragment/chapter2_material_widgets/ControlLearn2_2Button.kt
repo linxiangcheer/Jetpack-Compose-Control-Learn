@@ -43,7 +43,28 @@ fun ControlLearnButtonContent() {
 
             val paddingModifier = Modifier.padding(8.dp)
 
-            ControlLearnHeader(text = "Button + Icon Button")
+            val list = listOf<String>(
+                "//点击事件", "onClick: () -> Unit",
+                "//修饰符", "modifier: Modifier = Modifier",
+                "//是否启用按钮", "enabled: Boolean = true",
+                "//按钮的交互流 (暂未学习)", "interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }",
+                "//海拔", "elevation: ButtonElevation? = ButtonDefaults.elevation()",
+                "//外形", "shape: Shape = MaterialTheme.shapes.small",
+                "//边缘线", "border: BorderStroke? = null",
+                "//按钮颜色", "colors: ButtonColors = ButtonDefaults.buttonColors()",
+                "//内边距", "contentPadding: PaddingValues = ButtonDefaults.ContentPadding",
+                "//内部布局","content: @Composable RowScope.() -> Unit"
+            )
+            CodeCard(list = list, codeTitle = "Button控件参数")
+
+            val iconlist = listOf<String>(
+                "//图片载体", "imageVector: ImageVector",
+                "//描述", "contentDescription: String?,",
+                "//修饰符", "modifier: Modifier = Modifier",
+                "//色调", "tint: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current)",
+            )
+            CodeCard(list = iconlist, codeTitle = "Icon控件参数")
+
             ControlLearnExampleContentText(text = "TextButton 只有文本没有边框的Text")
             ControlLearnExampleContentText(text = "OutlinedButton 带边框的Text")
 

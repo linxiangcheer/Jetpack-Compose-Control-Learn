@@ -40,15 +40,15 @@ private fun ControlLearn2_5ScreenContent() {
             val cardCode = remember {
                 mutableStateListOf<String>(
                     "//修饰符", "modifier: Modifier = Modifier",
-                    "//圆角", "shape: Shape = MaterialTheme.shapes.medium",
+                    "//外形", "shape: Shape = MaterialTheme.shapes.medium",
                     "//背景颜色", "backgroundColor: Color = MaterialTheme.colors.surface",
                     "//内容默认颜色", "contentColor: Color = contentColorFor(backgroundColor)",
                     "//边缘线", "border: BorderStroke? = null",
                     "//海拔", "elevation: Dp = 1.dp",
-                    "content: @Composable () -> Unit"
+                    "//内部布局","content: @Composable () -> Unit"
                 )
             }
-            CodeCard(list = cardCode, codeTitle = "Card参数")
+            CodeCard(list = cardCode, codeTitle = "Card控件参数")
 
             ControlLearnDescription(text = "1-) shape (外形) 和 backgroundColor (背景颜色)")
             CardShapeAndBackgroundExample()

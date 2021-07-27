@@ -70,7 +70,7 @@ fun ControlLearnContent() {
                 "//在计算新文本布局时执行的回调函数,TextLayoutResult对象包含段落信息、文本大小、基线(base line)和其他细节", "onTextLayout: (TextLayoutResult) -> Unit = {}",
                 "//样式配置的文本; 如颜色,字体,行高等", "style: TextStyle = LocalTextStyle.current"
             )
-            CodeCard(list = list, codeTitle = "Text参数")
+            CodeCard(list = list, codeTitle = "Text控件参数")
 
             ControlLearnDescription(text = "1-) color (颜色)")
             TextSampleRow {
