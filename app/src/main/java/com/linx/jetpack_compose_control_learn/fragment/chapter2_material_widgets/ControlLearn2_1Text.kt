@@ -37,6 +37,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.linx.jetpack_compose_control_learn.components.CodeCard
 import com.linx.jetpack_compose_control_learn.components.ControlLearnDescription
 import com.linx.jetpack_compose_control_learn.components.ControlLearnHeader
 
@@ -52,7 +53,24 @@ fun ControlLearnContent() {
 
         item {
 
-            ControlLearnHeader(text = "Text")
+            val list = listOf<String>("//文本", "text: String",
+                "//修饰符", "modifier: Modifier = Modifier",
+                "//字的颜色", "color: Color = Color.Unspecified",
+                "//字体大小", "fontSize: TextUnit = TextUnit.Unspecified",
+                "//字体风格", "fontStyle: FontStyle? = null",
+                "//字体粗细", "fontWeight: FontWeight? = null",
+                "//字体包", "fontFamily: FontFamily? = null",
+                "//字间距", "letterSpacing: TextUnit = TextUnit.Unspecified",
+                "//删除线", "textDecoration: TextDecoration? = null",
+                "//字的对齐方式(局限在整个Text范围内)", "textAlign: TextAlign? = null",
+                "//行的间隔高度", "lineHeight: TextUnit = TextUnit.Unspecified",
+                "//字数溢出处理", "overflow: TextOverflow = TextOverflow.Clip",
+                "//文本是否应在软换行符处换行", "softWrap: Boolean = true",
+                "//最大行数", "maxLines: Int = Int.MAX_VALUE",
+                "//在计算新文本布局时执行的回调函数,TextLayoutResult对象包含段落信息、文本大小、基线(base line)和其他细节", "onTextLayout: (TextLayoutResult) -> Unit = {}",
+                "//样式配置的文本; 如颜色,字体,行高等", "style: TextStyle = LocalTextStyle.current"
+            )
+            CodeCard(list = list, codeTitle = "Text参数")
 
             ControlLearnDescription(text = "1-) color (颜色)")
             TextSampleRow {
