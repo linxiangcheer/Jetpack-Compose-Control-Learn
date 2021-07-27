@@ -2,6 +2,7 @@ package com.linx.jetpack_compose_control_learn.fragment.chapter2_material_widget
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.ScrollScope
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
@@ -10,11 +11,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.unit.dp
+import com.linx.jetpack_compose_control_learn.components.CodeCard
 import com.linx.jetpack_compose_control_learn.components.ControlLearnDescription
 import com.linx.jetpack_compose_control_learn.components.ControlLearnExampleContentText
 import com.linx.jetpack_compose_control_learn.components.ControlLearnHeader
@@ -31,7 +37,18 @@ private fun ControlLearn2_5ScreenContent() {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
 
-            ControlLearnHeader(text = "Card")
+            val cardCode = remember {
+                mutableStateListOf<String>(
+                    "//修饰符", "modifier: Modifier = Modifier",
+                    "//圆角", "shape: Shape = MaterialTheme.shapes.medium",
+                    "//背景颜色", "backgroundColor: Color = MaterialTheme.colors.surface",
+                    "//内容默认颜色", "contentColor: Color = contentColorFor(backgroundColor)",
+                    "//边缘线", "border: BorderStroke? = null",
+                    "//海拔", "elevation: Dp = 1.dp",
+                    "content: @Composable () -> Unit"
+                )
+            }
+            CodeCard(list = cardCode, codeTitle = "Card参数")
 
             ControlLearnDescription(text = "1-) shape (外形) 和 backgroundColor (背景颜色)")
             CardShapeAndBackgroundExample()
@@ -42,7 +59,7 @@ private fun ControlLearn2_5ScreenContent() {
             ControlLearnDescription(text = "3-) border (边缘)")
             CardBorderExample()
 
-            ControlLearnDescription(text = "4-) elevation (阴影)")
+            ControlLearnDescription(text = "4-) elevation (海拔)")
             CardElevationExample()
 
         }
@@ -161,8 +178,10 @@ fun CardBorderExample() {
         )
     )
 
-    ControlLearnExampleContentText(text = "纵向渐变 Brush.verticalGradient(List<Color>())\n" +
-            "横向渐变 Brush.horizontalGradient(List<Color>())")
+    ControlLearnExampleContentText(
+        text = "纵向渐变 Brush.verticalGradient(List<Color>())\n" +
+                "横向渐变 Brush.horizontalGradient(List<Color>())"
+    )
 
     Row(
         modifier = Modifier
@@ -213,5 +232,22 @@ fun CardBorderExample() {
 @Composable
 fun CardElevationExample() {
 
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp)
+            .padding(10.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+
+        Card(
+            modifier = Modifier
+                .fillMaxHeight()
+                .weight(1f),
+            backgroundColor = Color.Red,
+            elevation = 10.dp
+        ) {}
+
+    }
 }
 

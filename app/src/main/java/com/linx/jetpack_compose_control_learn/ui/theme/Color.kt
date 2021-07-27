@@ -21,3 +21,8 @@ val c_AED581 = Color(0xFFAED581)
 val c_F06292 = Color(0xFFF06292)
 val c_FFEB3B = Color(0xFFFFEB3B)
 val c_80DEEA = Color(0xFF80DEEA)
+
+val c_282c34 = Color(0xFF282c34)
+val c_58 = Color(0xFF585858)
+val c_fb8535 = Color(0xFFfb8535)
+val c_bfbbbb = Color(0xFFbfbbbb)
