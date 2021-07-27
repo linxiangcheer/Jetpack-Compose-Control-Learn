@@ -68,8 +68,12 @@ fun ControlLearnContent() {
                 "//文本是否应在软换行符处换行", "softWrap: Boolean = true",
                 "//最大行数", "maxLines: Int = Int.MAX_VALUE",
                 "//在计算新文本布局时执行的回调函数,TextLayoutResult对象包含段落信息、文本大小、基线(base line)和其他细节", "onTextLayout: (TextLayoutResult) -> Unit = {}",
-                "//样式配置的文本; 如颜色,字体,行高等", "style: TextStyle = LocalTextStyle.current"
+                "//样式配置的文本; 如颜色,字体,行高等", "style: TextStyle = LocalTextStyle.current",
+                "",
+                "//带注释的文字", "text: AnnotatedString",
+                "//内联内容", "inlineContent: Map<String, InlineTextContent> = mapOf()"
             )
+            Text(text = "")
             CodeCard(list = list, codeTitle = "Text控件参数")
 
             ControlLearnDescription(text = "1-) color (颜色)")

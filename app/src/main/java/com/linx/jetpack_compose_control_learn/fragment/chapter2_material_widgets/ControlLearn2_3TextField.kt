@@ -44,7 +44,7 @@ fun TextFieldScreenContent() {
 
             val list = listOf<String>(
                 "//值", "TextFieldValue / String",
-                "//value改变的时候拿到的回调", "onValueChange: (TextFieldValue) -> Unit",
+                "//value改变的时候拿到的回调", "onValueChange: (TextFieldValue / String) -> Unit",
                 "//修饰符", "modifier: Modifier = Modifier",
                 "//是否启用", "enabled: Boolean = true",
                 "//是否只读", "readOnly: Boolean = false",
@@ -61,9 +61,8 @@ fun TextFieldScreenContent() {
                 "//最大行数", "maxLines: Int = Int.MAX_VALUE",
                 "//交互流 (暂未学习)", "interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },",
                 "//外形", "shape: Shape = MaterialTheme.shapes.small.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize)",
-                "//颜色设置,包括文字、背景、光标等", "colors: TextFieldColors = TextFieldDefaults.textFieldColors()",
+                "//颜色设置,包括文字、背景、光标等", "colors: TextFieldColors = TextFieldDefaults.textFieldColors()"
             )
-
             CodeCard(list = list, codeTitle = "TextField控件参数")
 
             val fullWidthModifier = Modifier

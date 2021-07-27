@@ -59,6 +59,21 @@ fun ControlLearn2_4Content() {
 
             ControlLearnHeader(text = "Image")
 
+            val list = listOf<String>(
+                "//本地/网络图片保存的变量", "painter: Painter,",
+                "//内容详情", "contentDescription: String?",
+                "//修饰符", "modifier: Modifier = Modifier",
+                "//对齐方式", "alignment: Alignment = Alignment.Center",
+                "//图片缩放规则", "contentScale: ContentScale = ContentScale.Fit",
+                "//透明度", "alpha: Float = DefaultAlpha",
+                "//滤镜", "colorFilter: ColorFilter? = null",
+                "",
+                "//本地/网络图片保存的变量", "imageVector: ImageVector",
+                "",
+                "//bitmap图片", "bitmap: ImageBitmap"
+            )
+            CodeCard(list = list, codeTitle = "Image控件参数")
+
             ControlLearnDescription(text = "1-) Image布局绘制给定的ImageBitmap,用ImageVector或Painter")
             BasicImageExample()
             ImageVectorExample()
