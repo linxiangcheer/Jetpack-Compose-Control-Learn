@@ -57,8 +57,6 @@ fun ControlLearn2_4Content() {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
 
-            ControlLearnHeader(text = "Image")
-
             val list = listOf<String>(
                 "//本地/网络图片保存的变量", "painter: Painter,",
                 "//内容详情", "contentDescription: String?",

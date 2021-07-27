@@ -223,11 +223,11 @@ class MainActivity : ComponentActivity() {
         )
 
         val controlLearn2_5 = ControlLearnSectionModel(
-            title = "2-5 Card (未完)",
+            title = "2-5 Card",
             action = {
                 ControlLearn2_5Screen()
             },
-            description = "",
+            description = "创建基本的Card,设置Card的elevation（海拔）、shape（外形）等属性",
             tags = listOf(
                 TAG_COMPOSE,
                 TAG_CARD,
