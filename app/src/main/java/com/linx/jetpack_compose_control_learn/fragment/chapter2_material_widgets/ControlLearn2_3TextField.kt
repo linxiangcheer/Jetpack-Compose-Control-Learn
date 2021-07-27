@@ -22,9 +22,11 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.linx.jetpack_compose_control_learn.components.CodeCard
 import com.linx.jetpack_compose_control_learn.components.ControlLearnDescription
 import com.linx.jetpack_compose_control_learn.components.ControlLearnExampleContentText
 import com.linx.jetpack_compose_control_learn.components.ControlLearnHeader
@@ -40,11 +42,34 @@ fun TextFieldScreenContent() {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
 
+            val list = listOf<String>(
+                "//值", "TextFieldValue / String",
+                "//value改变的时候拿到的回调", "onValueChange: (TextFieldValue) -> Unit",
+                "//修饰符", "modifier: Modifier = Modifier",
+                "//是否启用", "enabled: Boolean = true",
+                "//是否只读", "readOnly: Boolean = false",
+                "//文字风格", "textStyle: TextStyle = LocalTextStyle.current",
+                "//标签", "label: @Composable (() -> Unit)? = null",
+                "//占位符", "placeholder: @Composable (() -> Unit)? = null",
+                "//输入框头部图标", "leadingIcon: @Composable (() -> Unit)? = null",
+                "//输入框尾部图标", "trailingIcon: @Composable (() -> Unit)? = null",
+                "//是否输入错误", "isError: Boolean = false",
+                "//可视转换 (可以设置为掩码字符串)", "visualTransformation: VisualTransformation = VisualTransformation.None",
+                "//输入设置 (软键盘、输入类型)", "keyboardOptions: KeyboardOptions = KeyboardOptions.Default",
+                "//输入行为 (软键盘点击事件设置)", "keyboardActions: KeyboardActions = KeyboardActions()",
+                "//是否单行", "singleLine: Boolean = false",
+                "//最大行数", "maxLines: Int = Int.MAX_VALUE",
+                "//交互流 (暂未学习)", "interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },",
+                "//外形", "shape: Shape = MaterialTheme.shapes.small.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize)",
+                "//颜色设置,包括文字、背景、光标等", "colors: TextFieldColors = TextFieldDefaults.textFieldColors()",
+            )
+
+            CodeCard(list = list, codeTitle = "TextField控件参数")
+
             val fullWidthModifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
 
-            ControlLearnHeader(text = "TextField")
             ControlLearnDescription(text = "1-) 文本框允许用户输入和编辑文本,记得和MutableState一起使用,以便储存String或TextFieldValue")
             //MutableState  TextField和String的不同
             TextFieldOrStringDifferent(fullWidthModifier)

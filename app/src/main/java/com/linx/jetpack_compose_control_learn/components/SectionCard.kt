@@ -103,7 +103,8 @@ fun CodeCard(list: List<String>, codeTitle: String = "", modifier: Modifier = Mo
             .padding(10.dp),
         backgroundColor = c_58,
         contentColor = c_fb8535,
-        shape = RoundedCornerShape(10.dp)
+        shape = RoundedCornerShape(10.dp),
+        elevation = 5.dp
     ) {
 
         Column(
