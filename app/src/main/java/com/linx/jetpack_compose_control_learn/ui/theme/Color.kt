@@ -13,7 +13,6 @@ val c_FF9800 = Color(0xFFFF9800)
 val c_FFA726 = Color(0xFFFFA726)
 val c_FFB74D = Color(0xFFFFB74D)
 
-
 val c_8BC34A = Color(0xFF8BC34A)
 val c_9CCC65 = Color(0xFF9CCC65)
 val c_AED581 = Color(0xFFAED581)
