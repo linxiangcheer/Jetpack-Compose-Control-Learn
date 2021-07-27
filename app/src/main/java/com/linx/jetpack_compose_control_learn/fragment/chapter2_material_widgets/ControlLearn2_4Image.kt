@@ -39,6 +39,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.accompanist.coil.rememberCoilPainter
+import com.google.accompanist.glide.rememberGlidePainter
 import com.google.accompanist.imageloading.ImageLoadState
 import com.linx.jetpack_compose_control_learn.R
 import com.linx.jetpack_compose_control_learn.components.*
@@ -69,11 +70,11 @@ fun ControlLearn2_4Content() {
             ControlLearnDescription(text = "3-) 设置图像的shape (外形)和filter (滤镜)")
             ImageShapeAndFilterExample()
 
-            ControlLearnDescription(text = "4-) 使用Glide从网络中获取图像资源并显示在界面上")
-            ImageDownloadWithGlideExample()
-
-            ControlLearnDescription(text = "5-) 使用Coil从网络中获取图像资源并显示在界面上 (推荐使用)")
+            ControlLearnDescription(text = "4-) 使用Coil从网络中获取图像资源并显示在界面上")
             ImageDownloadWithCoilExample()
+
+            ControlLearnDescription(text = "5-) 使用Glide从网络中获取图像资源并显示在界面上 (0.14.0已弃用,并计划在1.0之前删除,请使用Coil)")
+            ImageDownloadWithGlideExample()
 
         }
     }
@@ -500,6 +501,57 @@ private fun ImageShapeAndFilterExample() {
 }
 
 /**
+ * 使用Coil获取网络图片
+ * 实验性api
+ */
+@ExperimentalCoilApi
+@Composable
+private fun ImageDownloadWithCoilExample() {
+
+    val url =
+        "https://cdn-hz.skypixel.com/uploads/cn_files/photo/image/9e4d34c0-fd29-47d1-af5e-eedd9e673efb.jpg@!1920"
+
+    val painter = rememberImagePainter(data = url)
+
+    when (painter.state) {
+        //加载中
+        is ImagePainter.State.Loading -> {
+            println("喂喂喂 Loading")
+        }
+        //请求失败
+        is ImagePainter.State.Error -> {
+            println("喂喂喂 Error")
+        }
+        //请求成功
+        is ImagePainter.State.Success -> {
+            println("喂喂喂 Success")
+        }
+        //请求尚未启动
+        is ImagePainter.State.Empty -> {
+            println("喂喂喂 Empty")
+        }
+    }
+
+    Column(
+        modifier = Modifier
+            //外边框
+            .padding(bottom = 20.dp)
+            .fillMaxWidth()
+            .height(150.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Image(
+            painter = painter,
+            contentDescription = null,
+            //保持源图片宽高比,等比缩放
+            contentScale = ContentScale.Fit
+        )
+    }
+
+}
+
+/**
  * 使用Glide获取网络图片
  *
  */
@@ -548,57 +600,6 @@ fun ImageDownloadWithGlideExample() {
             Image(bitmap = imageBitmap, contentDescription = null)
         }
 
-    }
-
-}
-
-/**
- * 使用Coil获取网络图片
- * 实验性api
- */
-@ExperimentalCoilApi
-@Composable
-private fun ImageDownloadWithCoilExample() {
-
-    val url =
-        "https://cdn-hz.skypixel.com/uploads/cn_files/photo/image/9e4d34c0-fd29-47d1-af5e-eedd9e673efb.jpg@!1920"
-
-    val painter = rememberImagePainter(data = url)
-
-    when (painter.state) {
-        //加载中
-        is ImagePainter.State.Loading -> {
-            println("喂喂喂 Loading")
-        }
-        //请求失败
-        is ImagePainter.State.Error -> {
-            println("喂喂喂 Error")
-        }
-        //请求成功
-        is ImagePainter.State.Success -> {
-            println("喂喂喂 Success")
-        }
-        //请求尚未启动
-        is ImagePainter.State.Empty -> {
-            println("喂喂喂 Empty")
-        }
-    }
-
-    Column(
-        modifier = Modifier
-                //外边框
-            .padding(bottom = 20.dp)
-            .fillMaxWidth()
-            .height(150.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Image(
-            painter = painter,
-            contentDescription = null,
-            //保持源图片宽高比,等比缩放
-            contentScale = ContentScale.Fit
-        )
     }
 
 }
